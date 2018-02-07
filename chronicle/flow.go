@@ -6,7 +6,7 @@ import (
 	"github.com/rossus/tower_of_babel/common/types"
 )
 
-func RunLocalHistory(tile types.Tile) types.Tile {
+func runLocalHistory(tile types.Tile) types.Tile {
 		cultura:=tile.Chronica[time.GetCurrentYear()].SubCulture
 		cultura, event:=culture.YearlyCultureMutation(cultura)
 		tile.Chronica=ContinueLocalCultureChronicle(tile.Chronica, event, cultura)
@@ -19,7 +19,7 @@ func RunGlobalHistory(worldMap types.WorldMap, finalYear int) []types.CultureYea
 	for i:=0; i<finalYear-1; i++ {
 		for j:=0; j<len(worldMap.Tiles); j++ {
 			for k:=0 ; k<len(worldMap.Tiles[j]); k++ {
-				worldMap.Tiles[j][k] = RunLocalHistory(worldMap.Tiles[j][k])
+				worldMap.Tiles[j][k] = runLocalHistory(worldMap.Tiles[j][k])
 			}
 		}
 		//chronica=ContinueLocalCultureChronicle(chronica, event, cultura)
