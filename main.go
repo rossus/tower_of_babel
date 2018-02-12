@@ -11,6 +11,6 @@ func main() {
 	//chronicle.WriteLocalChronicle(chronica)
 	//chronicle.WriteLocalCultureStages(chronica)
 
-	worldMap:=maps.LoadMap("mycenae2")
+	worldMap:=maps.LoadAndConvertMap("mycenae2")
 	chronica:=chronicle.RunGlobalHistory(worldMap, 5000)
 }
