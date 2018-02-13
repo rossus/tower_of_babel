@@ -7,7 +7,7 @@ import (
 )
 
 func runLocalHistory(tile types.Tile) types.Tile {
-	cultura := tile.Chronica[time.GetCurrentYear()].SubCulture
+	cultura := tile.Chronica[time.GetCurrentYear()-2].SubCulture
 	cultura, event := culture.YearlyCultureMutation(cultura)
 	tile.Chronica = ContinueLocalCultureChronicle(tile.Chronica, event, cultura)
 	return tile

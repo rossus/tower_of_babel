@@ -25,7 +25,7 @@ func ContinueGlobalCultureChronicle(chronicle []types.CultureYearGlobalChronicle
 }
 
 func AddCultureToList(tile types.Tile, cultures []types.SubCulture) []types.SubCulture {
-	tileCulture:=tile.Chronica[time.GetCurrentYear()].SubCulture
+	tileCulture:=tile.Chronica[time.GetCurrentYear()-1].SubCulture
 	for i := 0; i < len(cultures); i++ {
 		if tileCulture == cultures[i] {
 			return cultures
