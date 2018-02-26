@@ -15,17 +15,21 @@ func makeBaseCulture() types.BaseCulture {
 
 func makeCulture(baseCulture types.BaseCulture) types.Culture {
 	var culture types.Culture
+	var newLast = 1
 	culture.BaseCulture = baseCulture
 	culture.Code = baseCulture.Code
 	culture.Stage = 1
+	culture.Last = &newLast
 	return culture
 }
 
 func makeLocalCulture(stageCulture types.Culture) types.LocalCulture {
 	var culture types.LocalCulture
+	var newLast = 1
 	culture.Culture = stageCulture
 	culture.Code = stageCulture.Code
 	culture.SubStage = 1
+	culture.Last = &newLast
 	return culture
 }
 
@@ -51,7 +55,9 @@ func DevelopNewCulture(init types.Culture, code types.CultureGeneCode) types.Sub
 	var culture types.Culture
 	culture.Code = code
 	culture.BaseCulture = init.BaseCulture
-	culture.Stage = init.Stage + 1
+	culture.Last = init.Last
+	*culture.Last++
+	culture.Stage = *culture.Last
 	return makeSubCulture(makeLocalCulture(culture))
 }
 
@@ -59,7 +65,9 @@ func DevelopNewLocalCulture(init types.LocalCulture, code types.CultureGeneCode)
 	var culture types.LocalCulture
 	culture.Code = code
 	culture.Culture = init.Culture
-	culture.SubStage = init.SubStage + 1
+	culture.Last = init.Last
+	*culture.Last++
+	culture.SubStage = *culture.Last
 	return makeSubCulture(culture)
 }
 

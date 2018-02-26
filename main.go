@@ -13,9 +13,11 @@ func main() {
 	//chronicle.WriteLocalCultureStages(chronica)
 
 	worldMap:=maps.LoadAndConvertMap("mycenae2")
-	chronica:=chronicle.RunGlobalHistory(worldMap, 10)
+	chronica, worldMap:=chronicle.RunGlobalHistory(worldMap, 1000)
 
-	for i:=0; i<len(chronica[1].Cultures); i++ {
-		fmt.Println(chronica[1].Cultures[i].Name, " ", chronica[1].Cultures[i].Stage, " (", chronica[1].Cultures[i].SubStage, ")")
+	for i:=0; i<len(chronica[999].Cultures); i++ {
+		fmt.Println(chronica[999].Cultures[i].Name, " ", chronica[999].Cultures[i].Stage, " (", chronica[999].Cultures[i].SubStage, ")")
 	}
+
+	chronicle.WriteLocalCultureStages(worldMap.Tiles[0][0].Chronica)
 }

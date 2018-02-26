@@ -21,12 +21,14 @@ type BaseCulture struct {
 type Culture struct {
 	BaseCulture
 	Stage int
+	Last *int							//youngest stage of this culture in the world
 	Code CultureGeneCode
 }
 
 type LocalCulture struct {
 	Culture
 	SubStage int
+	Last *int							//youngest stage of this culture in the world
 	Code CultureGeneCode
 }
 
