@@ -20,4 +20,12 @@ func main() {
 	}
 
 	chronicle.WriteLocalCultureStages(worldMap.Tiles[0][0].Chronica)
+
+	fmt.Println(chronica[0].Cultures[0].LocalCulture.Area(worldMap))
+
+	for i:=0; i<len(worldMap.Tiles[0][0].Chronica); i++ {
+		fmt.Println(i+1, " --- ", chronica[0].Cultures[0].LocalCulture.YearArea(worldMap, i+1))
+	}
+
+	fmt.Println(chronica[0].Cultures[0].LocalCulture.Started(chronica), " - ", chronica[0].Cultures[0].LocalCulture.Ended(chronica))
 }
