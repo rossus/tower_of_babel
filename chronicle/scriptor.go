@@ -107,6 +107,7 @@ func WriteScriptorHeader() {
 	fmt.Println("+-----------------------------------+")
 	fmt.Println("|                                   |")
 	fmt.Println("| TOWER OF BABEL v0.02 (15.01.2018) |")
+	fmt.Println("|       pre-0.03 (27.02.2018)       |")
 	fmt.Println("|                                   |")
 	fmt.Println("+-----------------------------------+")
 	fmt.Println()

@@ -8,24 +8,27 @@ import (
 
 func main() {
 	chronicle.WriteScriptorHeader()
-	//chronica:=chronicle.RunLocalHistory(5000)
-	//chronicle.WriteLocalChronicle(chronica)
-	//chronicle.WriteLocalCultureStages(chronica)
 
 	worldMap:=maps.LoadAndConvertMap("mycenae2")
-	chronica, worldMap:=chronicle.RunGlobalHistory(worldMap, 1000)
+	chronica, worldMap:=chronicle.RunGlobalHistory(worldMap, 5000)
 
-	for i:=0; i<len(chronica[999].Cultures); i++ {
-		fmt.Println(chronica[999].Cultures[i].Name, " ", chronica[999].Cultures[i].Stage, " (", chronica[999].Cultures[i].SubStage, ")")
-	}
+	//for i:=0; i<len(chronica[999].Cultures); i++ {
+	//	fmt.Println(chronica[999].Cultures[i].Name, " ", chronica[999].Cultures[i].Stage, " (", chronica[999].Cultures[i].SubStage, ")")
+	//}
 
 	chronicle.WriteLocalCultureStages(worldMap.Tiles[0][0].Chronica)
 
+	fmt.Println(chronica[0].Cultures[0].Area(worldMap))
 	fmt.Println(chronica[0].Cultures[0].LocalCulture.Area(worldMap))
+	fmt.Println(chronica[0].Cultures[0].Culture.Area(worldMap))
+	fmt.Println(chronica[0].Cultures[0].BaseCulture.Area(worldMap))
 
-	for i:=0; i<len(worldMap.Tiles[0][0].Chronica); i++ {
-		fmt.Println(i+1, " --- ", chronica[0].Cultures[0].LocalCulture.YearArea(worldMap, i+1))
-	}
+	//for i:=0; i<len(worldMap.Tiles[0][0].Chronica); i++ {
+	//	fmt.Println(i+1, " --- ", chronica[0].Cultures[0].LocalCulture.YearArea(worldMap, i+1))
+	//}
 
+	fmt.Println(chronica[0].Cultures[0].Started(chronica), " - ", chronica[0].Cultures[0].Ended(chronica))
 	fmt.Println(chronica[0].Cultures[0].LocalCulture.Started(chronica), " - ", chronica[0].Cultures[0].LocalCulture.Ended(chronica))
+	fmt.Println(chronica[0].Cultures[0].Culture.Started(chronica), " - ", chronica[0].Cultures[0].Culture.Ended(chronica))
+	fmt.Println(chronica[0].Cultures[0].BaseCulture.Started(chronica), " - ", chronica[0].Cultures[0].BaseCulture.Ended(chronica))
 }
