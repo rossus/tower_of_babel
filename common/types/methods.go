@@ -1,7 +1,8 @@
 package types
 
 //YearArea methods
-func (culture BaseCulture) YearArea(worldMap WorldMap, year int) int {
+func (culture BaseCulture) YearArea(chronica GlobalChronicle, year int) int {
+	worldMap:=chronica.WorldMap
 	area := 0
 	for i := 0; i < len(worldMap.Tiles); i++ {
 		for j := 0; j < len(worldMap.Tiles[i]); j++ {
@@ -13,7 +14,8 @@ func (culture BaseCulture) YearArea(worldMap WorldMap, year int) int {
 	return area
 }
 
-func (culture Culture) YearArea(worldMap WorldMap, year int) int {
+func (culture Culture) YearArea(chronica GlobalChronicle, year int) int {
+	worldMap:=chronica.WorldMap
 	area := 0
 	for i := 0; i < len(worldMap.Tiles); i++ {
 		for j := 0; j < len(worldMap.Tiles[i]); j++ {
@@ -25,7 +27,8 @@ func (culture Culture) YearArea(worldMap WorldMap, year int) int {
 	return area
 }
 
-func (culture LocalCulture) YearArea(worldMap WorldMap, year int) int {
+func (culture LocalCulture) YearArea(chronica GlobalChronicle, year int) int {
+	worldMap:=chronica.WorldMap
 	area := 0
 	for i := 0; i < len(worldMap.Tiles); i++ {
 		for j := 0; j < len(worldMap.Tiles[i]); j++ {
@@ -37,7 +40,8 @@ func (culture LocalCulture) YearArea(worldMap WorldMap, year int) int {
 	return area
 }
 
-func (culture SubCulture) YearArea(worldMap WorldMap, year int) int {
+func (culture SubCulture) YearArea(chronica GlobalChronicle, year int) int {
+	worldMap:=chronica.WorldMap
 	area := 0
 	for i := 0; i < len(worldMap.Tiles); i++ {
 		for j := 0; j < len(worldMap.Tiles[i]); j++ {
@@ -50,11 +54,12 @@ func (culture SubCulture) YearArea(worldMap WorldMap, year int) int {
 }
 
 //Area methods
-func (culture BaseCulture) Area(worldMap WorldMap) (year []int, area int) {
+func (culture BaseCulture) Area(chronica GlobalChronicle) (year []int, area int) {
+	worldMap:=chronica.WorldMap
 	area = 0
 	year = []int{}
 	for i := 0; i < len(worldMap.Tiles[0][0].Chronica); i++ {
-		yearArea := culture.YearArea(worldMap, i+1)
+		yearArea := culture.YearArea(chronica, i+1)
 		if yearArea == area {
 			year = append(year, i+1)
 		} else if yearArea > area {
@@ -66,11 +71,12 @@ func (culture BaseCulture) Area(worldMap WorldMap) (year []int, area int) {
 	return
 }
 
-func (culture Culture) Area(worldMap WorldMap) (year []int, area int) {
+func (culture Culture) Area(chronica GlobalChronicle) (year []int, area int) {
+	worldMap:=chronica.WorldMap
 	area = 0
 	year = []int{}
 	for i := 0; i < len(worldMap.Tiles[0][0].Chronica); i++ {
-		yearArea := culture.YearArea(worldMap, i+1)
+		yearArea := culture.YearArea(chronica, i+1)
 		if yearArea == area {
 			year = append(year, i+1)
 		} else if yearArea > area {
@@ -82,11 +88,12 @@ func (culture Culture) Area(worldMap WorldMap) (year []int, area int) {
 	return
 }
 
-func (culture LocalCulture) Area(worldMap WorldMap) (year []int, area int) {
+func (culture LocalCulture) Area(chronica GlobalChronicle) (year []int, area int) {
+	worldMap:=chronica.WorldMap
 	area = 0
 	year = []int{}
 	for i := 0; i < len(worldMap.Tiles[0][0].Chronica); i++ {
-		yearArea := culture.YearArea(worldMap, i+1)
+		yearArea := culture.YearArea(chronica, i+1)
 		if yearArea == area {
 			year = append(year, i+1)
 		} else if yearArea > area {
@@ -98,11 +105,12 @@ func (culture LocalCulture) Area(worldMap WorldMap) (year []int, area int) {
 	return
 }
 
-func (culture SubCulture) Area(worldMap WorldMap) (year []int, area int) {
+func (culture SubCulture) Area(chronica GlobalChronicle) (year []int, area int) {
+	worldMap:=chronica.WorldMap
 	area = 0
 	year = []int{}
 	for i := 0; i < len(worldMap.Tiles[0][0].Chronica); i++ {
-		yearArea := culture.YearArea(worldMap, i+1)
+		yearArea := culture.YearArea(chronica, i+1)
 		if yearArea == area {
 			year = append(year, i+1)
 		} else if yearArea > area {
@@ -115,7 +123,8 @@ func (culture SubCulture) Area(worldMap WorldMap) (year []int, area int) {
 }
 
 //Started methods
-func (culture BaseCulture) Started(chronicle []CultureYearGlobalChronicle) (year int) {
+func (culture BaseCulture) Started(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
 	for i := 0; i < len(chronicle); i++ {
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j].BaseCulture {
@@ -126,7 +135,8 @@ func (culture BaseCulture) Started(chronicle []CultureYearGlobalChronicle) (year
 	return
 }
 
-func (culture Culture) Started(chronicle []CultureYearGlobalChronicle) (year int) {
+func (culture Culture) Started(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
 	for i := 0; i < len(chronicle); i++ {
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j].Culture {
@@ -137,7 +147,8 @@ func (culture Culture) Started(chronicle []CultureYearGlobalChronicle) (year int
 	return
 }
 
-func (culture LocalCulture) Started(chronicle []CultureYearGlobalChronicle) (year int) {
+func (culture LocalCulture) Started(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
 	for i := 0; i < len(chronicle); i++ {
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j].LocalCulture {
@@ -148,7 +159,8 @@ func (culture LocalCulture) Started(chronicle []CultureYearGlobalChronicle) (yea
 	return
 }
 
-func (culture SubCulture) Started(chronicle []CultureYearGlobalChronicle) (year int) {
+func (culture SubCulture) Started(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
 	for i := 0; i < len(chronicle); i++ {
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j] {
@@ -160,8 +172,9 @@ func (culture SubCulture) Started(chronicle []CultureYearGlobalChronicle) (year 
 }
 
 //Ended methods
-func (culture BaseCulture) Ended(chronicle []CultureYearGlobalChronicle) (year int) {
-	for i := culture.Started(chronicle) - 1; i < len(chronicle); i++ {
+func (culture BaseCulture) Ended(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
+	for i := culture.Started(chronica) - 1; i < len(chronicle); i++ {
 		sign := false
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j].BaseCulture {
@@ -175,8 +188,9 @@ func (culture BaseCulture) Ended(chronicle []CultureYearGlobalChronicle) (year i
 	return 0
 }
 
-func (culture Culture) Ended(chronicle []CultureYearGlobalChronicle) (year int) {
-	for i := culture.Started(chronicle) - 1; i < len(chronicle); i++ {
+func (culture Culture) Ended(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
+	for i := culture.Started(chronica) - 1; i < len(chronicle); i++ {
 		sign := false
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j].Culture {
@@ -190,8 +204,9 @@ func (culture Culture) Ended(chronicle []CultureYearGlobalChronicle) (year int) 
 	return 0
 }
 
-func (culture LocalCulture) Ended(chronicle []CultureYearGlobalChronicle) (year int) {
-	for i := culture.Started(chronicle) - 1; i < len(chronicle); i++ {
+func (culture LocalCulture) Ended(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
+	for i := culture.Started(chronica) - 1; i < len(chronicle); i++ {
 		sign := false
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j].LocalCulture {
@@ -205,8 +220,9 @@ func (culture LocalCulture) Ended(chronicle []CultureYearGlobalChronicle) (year 
 	return 0
 }
 
-func (culture SubCulture) Ended(chronicle []CultureYearGlobalChronicle) (year int) {
-	for i := culture.Started(chronicle) - 1; i < len(chronicle); i++ {
+func (culture SubCulture) Ended(chronica GlobalChronicle) (year int) {
+	chronicle:=chronica.Chronica
+	for i := culture.Started(chronica) - 1; i < len(chronicle); i++ {
 		sign := false
 		for j := 0; j < len(chronicle[i].Cultures); j++ {
 			if culture == chronicle[i].Cultures[j] {

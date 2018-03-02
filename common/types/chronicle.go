@@ -40,9 +40,9 @@ type GlobalChronicle struct {
 
 //Interface for all types of cultures from SubCulture to BaseCulture
 type Cultures interface {
-	YearArea(worldMap WorldMap, year int) int
-	Area(worldMap WorldMap) (year []int, area int)
-	Started(chronicle []CultureYearGlobalChronicle) (year int)
-	Ended(chronicle []CultureYearGlobalChronicle) (year int)
+	YearArea(chronica GlobalChronicle, year int) int
+	Area(chronica GlobalChronicle) (year []int, area int)
+	Started(chronica GlobalChronicle) (year int)
+	Ended(chronica GlobalChronicle) (year int)
 	Type() string
 }
