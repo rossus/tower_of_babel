@@ -116,28 +116,28 @@ func WriteScriptorHeader() {
 	fmt.Println()
 }
 
-func DrawYearCultureMap (culture types.Cultures, year int, worldMap types.WorldMap) {
+func DrawYearCultureMap (culture types.Cultures, year int, chronica types.GlobalChronicle) {
 	//var red = (ct.Bg(ct.Red) | ct.Bold).Paint
 	//var blue = (ct.Bg(ct.Blue) | ct.Bold).Paint
 	var green = (ct.Bg(ct.Green) | ct.Bold).Paint
 	//var chosen = (ct.Bg(ct.Yellow) | ct.Fg(ct.Yellow)).Paint
 
-	for i:=0; i<len(worldMap.Tiles); i++ {
+	for i:=0; i<len(chronica.WorldMap.Tiles); i++ {
 		fmt.Println()
-		for j:=0; j<len(worldMap.Tiles[i]); j++ {
+		for j:=0; j<len(chronica.WorldMap.Tiles[i]); j++ {
 			var tileCulture types.Cultures
-			if culture.Type()=="BaseCulture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1].BaseCulture} else
-			if culture.Type()=="Culture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1].Culture} else
-			if culture.Type()=="LocalCulture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1].LocalCulture} else
-			if culture.Type()=="SubCulture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1]}
+			if culture.Type()=="BaseCulture" {tileCulture=chronica.WorldMap.Tiles[i][j].Chronica[year-1].BaseCulture} else
+			if culture.Type()=="Culture" {tileCulture=chronica.WorldMap.Tiles[i][j].Chronica[year-1].Culture} else
+			if culture.Type()=="LocalCulture" {tileCulture=chronica.WorldMap.Tiles[i][j].Chronica[year-1].LocalCulture} else
+			if culture.Type()=="SubCulture" {tileCulture=chronica.WorldMap.Tiles[i][j].Chronica[year-1]}
 
 			//if (i==0)&&(j==5) {
 			//	fmt.Print(chosen(worldMap.Tiles[i][j].Geography))
 			//} else
 			if tileCulture==culture {
-				fmt.Print(green(worldMap.Tiles[i][j].Geography))
+				fmt.Print(green(chronica.WorldMap.Tiles[i][j].Geography))
 			} else {
-				fmt.Print(worldMap.Tiles[i][j].Geography)
+				fmt.Print(chronica.WorldMap.Tiles[i][j].Geography)
 			}
 		}
 	}

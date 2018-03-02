@@ -13,7 +13,7 @@ func runLocalHistory(tile types.Tile) types.Tile {
 	return tile
 }
 
-func RunGlobalHistory(worldMap types.WorldMap, finalYear int) ([]types.CultureYearGlobalChronicle, types.WorldMap) {
+func RunGlobalHistory(worldMap types.WorldMap, finalYear int) (types.GlobalChronicle) {
 	originCulture := culture.MakeOriginalCulture()
 	chronica := StartGlobalCultureChronicle(worldMap, originCulture)
 	for i := 0; i < finalYear-1; i++ {
@@ -26,5 +26,10 @@ func RunGlobalHistory(worldMap types.WorldMap, finalYear int) ([]types.CultureYe
 		}
 		chronica = ContinueGlobalCultureChronicle(chronica, cultures)
 	}
-	return chronica, worldMap
+
+	var chronicle = types.GlobalChronicle{}
+	chronicle.WorldMap=worldMap
+	chronicle.Chronica=chronica
+
+	return chronicle
 }

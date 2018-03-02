@@ -33,6 +33,11 @@ type CultureYearGlobalChronicle struct {
 
 type CultureGlobalTreeHistory []BaseCultureTreeHistory
 
+type GlobalChronicle struct {
+	WorldMap WorldMap
+	Chronica []CultureYearGlobalChronicle
+}
+
 //Interface for all types of cultures from SubCulture to BaseCulture
 type Cultures interface {
 	YearArea(worldMap WorldMap, year int) int
