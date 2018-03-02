@@ -3,6 +3,7 @@ package chronicle
 import (
 	"github.com/rossus/tower_of_babel/common/types"
 	"fmt"
+	"github.com/kortschak/ct"
 )
 
 func writeOneYearLocal(chronica []types.CultureYearLocalChronicle, year int) {
@@ -104,11 +105,40 @@ func WriteLocalCultureStages(chronicle []types.CultureYearLocalChronicle) {
 }
 
 func WriteScriptorHeader() {
-	fmt.Println("+-----------------------------------+")
-	fmt.Println("|                                   |")
-	fmt.Println("| TOWER OF BABEL v0.02 (15.01.2018) |")
-	fmt.Println("|       pre-0.03 (27.02.2018)       |")
-	fmt.Println("|                                   |")
-	fmt.Println("+-----------------------------------+")
+	var babil = (ct.Bg(ct.Blue) | ct.Fg(ct.BoldYellow)).Paint
+
+	fmt.Println(babil("+-----------------------------------+"))
+	fmt.Println(babil("|~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~ |"))
+	fmt.Println(babil("| TOWER OF BABEL v0.02 (15.01.2018)~|"))
+	fmt.Println(babil("|~  ~  ~pre-0.03 (27.02.2018)  ~  ~ |"))
+	fmt.Println(babil("| ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~|"))
+	fmt.Println(babil("+-----------------------------------+"))
 	fmt.Println()
+}
+
+func DrawYearCultureMap (culture types.Cultures, year int, worldMap types.WorldMap) {
+	//var red = (ct.Bg(ct.Red) | ct.Bold).Paint
+	//var blue = (ct.Bg(ct.Blue) | ct.Bold).Paint
+	var green = (ct.Bg(ct.Green) | ct.Bold).Paint
+	//var chosen = (ct.Bg(ct.Yellow) | ct.Fg(ct.Yellow)).Paint
+
+	for i:=0; i<len(worldMap.Tiles); i++ {
+		fmt.Println()
+		for j:=0; j<len(worldMap.Tiles[i]); j++ {
+			var tileCulture types.Cultures
+			if culture.Type()=="BaseCulture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1].BaseCulture} else
+			if culture.Type()=="Culture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1].Culture} else
+			if culture.Type()=="LocalCulture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1].LocalCulture} else
+			if culture.Type()=="SubCulture" {tileCulture=worldMap.Tiles[i][j].Chronica[year-1]}
+
+			//if (i==0)&&(j==5) {
+			//	fmt.Print(chosen(worldMap.Tiles[i][j].Geography))
+			//} else
+			if tileCulture==culture {
+				fmt.Print(green(worldMap.Tiles[i][j].Geography))
+			} else {
+				fmt.Print(worldMap.Tiles[i][j].Geography)
+			}
+		}
+	}
 }

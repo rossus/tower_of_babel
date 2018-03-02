@@ -9,8 +9,8 @@ import (
 func main() {
 	chronicle.WriteScriptorHeader()
 
-	worldMap:=maps.LoadAndConvertMap("mycenae2")
-	chronica, worldMap:=chronicle.RunGlobalHistory(worldMap, 5000)
+	worldMap := maps.LoadAndConvertMap("mycenae2")
+	chronica, worldMap := chronicle.RunGlobalHistory(worldMap, 5000)
 
 	//for i:=0; i<len(chronica[999].Cultures); i++ {
 	//	fmt.Println(chronica[999].Cultures[i].Name, " ", chronica[999].Cultures[i].Stage, " (", chronica[999].Cultures[i].SubStage, ")")
@@ -31,4 +31,16 @@ func main() {
 	fmt.Println(chronica[0].Cultures[0].LocalCulture.Started(chronica), " - ", chronica[0].Cultures[0].LocalCulture.Ended(chronica))
 	fmt.Println(chronica[0].Cultures[0].Culture.Started(chronica), " - ", chronica[0].Cultures[0].Culture.Ended(chronica))
 	fmt.Println(chronica[0].Cultures[0].BaseCulture.Started(chronica), " - ", chronica[0].Cultures[0].BaseCulture.Ended(chronica))
+
+	chronicle.DrawYearCultureMap(worldMap.Tiles[0][0].Chronica[0].BaseCulture, 500, worldMap)
+	fmt.Println()
+	chronicle.DrawYearCultureMap(worldMap.Tiles[0][0].Chronica[0].BaseCulture, 1000, worldMap)
+	fmt.Println()
+	chronicle.DrawYearCultureMap(worldMap.Tiles[0][0].Chronica[0].BaseCulture, 2000, worldMap)
+	fmt.Println()
+	chronicle.DrawYearCultureMap(worldMap.Tiles[0][0].Chronica[0].BaseCulture, 3000, worldMap)
+	fmt.Println()
+	chronicle.DrawYearCultureMap(worldMap.Tiles[0][0].Chronica[0].BaseCulture, 4000, worldMap)
+	fmt.Println()
+	chronicle.DrawYearCultureMap(worldMap.Tiles[0][0].Chronica[0].BaseCulture, 5000, worldMap)
 }

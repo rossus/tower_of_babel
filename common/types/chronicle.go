@@ -35,8 +35,9 @@ type CultureGlobalTreeHistory []BaseCultureTreeHistory
 
 //Interface for all types of cultures from SubCulture to BaseCulture
 type Cultures interface {
-	YearArea(worldMap WorldMap, year int)
-	Area(worldMap WorldMap)
-	Started(chronicle []CultureYearGlobalChronicle)
-	Ended(chronicle []CultureYearGlobalChronicle)
+	YearArea(worldMap WorldMap, year int) int
+	Area(worldMap WorldMap) (year []int, area int)
+	Started(chronicle []CultureYearGlobalChronicle) (year int)
+	Ended(chronicle []CultureYearGlobalChronicle) (year int)
+	Type() string
 }

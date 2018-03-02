@@ -219,3 +219,20 @@ func (culture SubCulture) Ended(chronicle []CultureYearGlobalChronicle) (year in
 	}
 	return 0
 }
+
+//Type methods
+func (culture BaseCulture) Type() string {
+	return "BaseCulture"
+}
+
+func (culture Culture) Type() string {
+	return "Culture"
+}
+
+func (culture LocalCulture) Type() string {
+	return "LocalCulture"
+}
+
+func (culture SubCulture) Type() string {
+	return "SubCulture"
+}
