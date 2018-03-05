@@ -108,9 +108,9 @@ func WriteScriptorHeader() {
 
 	fmt.Println(babil("+-----------------------------------+"))
 	fmt.Println(babil("|~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~ |"))
-	fmt.Println(babil("| TOWER OF BABEL v0.02 (15.01.2018)~|"))
-	fmt.Println(babil("|~  ~  ~pre-0.03 (27.02.2018)  ~  ~ |"))
-	fmt.Println(babil("| ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~|"))
+	fmt.Println(babil("| TOWER OF BABEL v0.03 (05.03.2018)~|"))
+	fmt.Println(babil("|~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~ |"))
+	//fmt.Println(babil("| ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~|"))
 	fmt.Println(babil("+-----------------------------------+"))
 	fmt.Println()
 }
@@ -152,42 +152,80 @@ func DrawYearCultureMap(culture types.Cultures, year int, chronica types.GlobalC
 }
 
 func TellMeAStory(chronica types.GlobalChronicle) {
+	final:=len(chronica.Chronica)
 	fmt.Println()
 	origin := chronica.WorldMap.Tiles[0][0].Chronica[0].SubCulture
 	fmt.Printf("This story began at the year 1, when entire world was of %s culture...", origin.Name)
 	DrawYearCultureMap(origin.LocalCulture, 1, chronica)
 	fmt.Println()
 	year, _ := origin.Area(chronica)
-	fmt.Printf("Original subculture began to decay at the year %v...", year[len(year)-1]+1)
-	DrawYearCultureMap(origin, year[len(year)-1]+1, chronica)
-	fmt.Println()
-	yearEnd := origin.Ended(chronica)
-	fmt.Printf("The year %v was the last year for that subculture...", yearEnd)
-	DrawYearCultureMap(origin, yearEnd, chronica)
+	if year[len(year)-1]==final {
+		fmt.Printf("And this subculture still at it's highest point at the year %v", final)
+	} else {
+		fmt.Printf("Original subculture began to decay at the year %v...", year[len(year)-1]+1)
+		DrawYearCultureMap(origin, year[len(year)-1]+1, chronica)
+		fmt.Println()
+		yearEnd := origin.Ended(chronica)
+		if yearEnd==0 {
+			fmt.Printf("This subculture still exists at the year %v", final)
+			DrawYearCultureMap(origin, final, chronica)
+		} else {
+			fmt.Printf("The year %v was the last year for that subculture...", yearEnd)
+			DrawYearCultureMap(origin, yearEnd, chronica)
+		}
+	}
 	fmt.Println()
 	year, _ = origin.LocalCulture.Area(chronica)
-	fmt.Printf("Original local culture began to decay at the year %v...", year[len(year)-1]+1)
-	DrawYearCultureMap(origin.LocalCulture, year[len(year)-1]+1, chronica)
-	fmt.Println()
-	yearEnd = origin.LocalCulture.Ended(chronica)
-	fmt.Printf("The year %v was the last year for that local culture...", yearEnd)
-	DrawYearCultureMap(origin.LocalCulture, yearEnd, chronica)
+	if year[len(year)-1]==final {
+		fmt.Printf("This local culture still at it's highest point at the year %v", final)
+	} else {
+		fmt.Printf("Original local culture began to decay at the year %v...", year[len(year)-1]+1)
+		DrawYearCultureMap(origin.LocalCulture, year[len(year)-1]+1, chronica)
+		fmt.Println()
+		yearEnd := origin.LocalCulture.Ended(chronica)
+		if yearEnd==0 {
+			fmt.Printf("This local culture still exists at the year %v", final)
+			DrawYearCultureMap(origin.LocalCulture, final, chronica)
+		} else {
+			fmt.Printf("The year %v was the last year for that local culture...", yearEnd)
+			DrawYearCultureMap(origin.LocalCulture, yearEnd, chronica)
+		}
+	}
 	fmt.Println()
 	year, _ = origin.Culture.Area(chronica)
-	fmt.Printf("Original culture began to decay at the year %v...", year[len(year)-1]+1)
-	DrawYearCultureMap(origin.Culture, year[len(year)-1]+1, chronica)
-	fmt.Println()
-	yearEnd = origin.Culture.Ended(chronica)
-	fmt.Printf("The year %v was the last year for that culture...", yearEnd)
-	DrawYearCultureMap(origin.Culture, yearEnd, chronica)
+	if year[len(year)-1]==final {
+		fmt.Printf("This culture still at it's highest point at the year %v", final)
+	} else {
+		fmt.Printf("Original culture began to decay at the year %v...", year[len(year)-1]+1)
+		DrawYearCultureMap(origin.Culture, year[len(year)-1]+1, chronica)
+		fmt.Println()
+		yearEnd := origin.Culture.Ended(chronica)
+		if yearEnd==0 {
+			fmt.Printf("This culture still exists at the year %v", final)
+			DrawYearCultureMap(origin.Culture, final, chronica)
+		} else {
+			fmt.Printf("The year %v was the last year for that culture...", yearEnd)
+			DrawYearCultureMap(origin.Culture, yearEnd, chronica)
+		}
+	}
 	fmt.Println()
 	year, _ = origin.BaseCulture.Area(chronica)
-	fmt.Printf("Original base culture began to decay at the year %v...", year[len(year)-1]+1)
-	DrawYearCultureMap(origin.BaseCulture, year[len(year)-1]+1, chronica)
+	if year[len(year)-1]==final {
+		fmt.Printf("This base culture still at it's highest point at the year %v", final)
+	} else {
+		fmt.Printf("Original base culture began to decay at the year %v...", year[len(year)-1]+1)
+		DrawYearCultureMap(origin.BaseCulture, year[len(year)-1]+1, chronica)
+		fmt.Println()
+		yearEnd := origin.BaseCulture.Ended(chronica)
+		if yearEnd==0 {
+			fmt.Printf("This base culture still exists at the year %v", final)
+			DrawYearCultureMap(origin.BaseCulture, final, chronica)
+		} else {
+			fmt.Printf("The year %v was the last year for that base culture...", yearEnd)
+			DrawYearCultureMap(origin.BaseCulture, yearEnd, chronica)
+		}
+	}
 	fmt.Println()
-	yearEnd = origin.BaseCulture.Ended(chronica)
-	fmt.Printf("The year %v was the last year for that base culture...", yearEnd)
-	DrawYearCultureMap(origin.BaseCulture, yearEnd, chronica)
 }
 
 
