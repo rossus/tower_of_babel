@@ -229,25 +229,24 @@ func TellMeAStory(chronica types.GlobalChronicle) {
 }
 
 
-func Atlas(chronica types.GlobalChronicle) {
+func Atlas(chronica types.GlobalChronicle, cultureCode string, year int) {
+	var culture types.Cultures
+	var culType string
+	if cultureCode=="s" {
+		culture = chronica.WorldMap.Tiles[0][0].Chronica[0]
+		culType="subculture"
+	} else if cultureCode=="l"{
+		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].LocalCulture
+		culType="local culture"
+	} else if cultureCode=="c"{
+		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].Culture
+		culType="culture"
+	} else if cultureCode=="b"{
+		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture
+		culType="base culture"
+	}
 	fmt.Println()
-	fmt.Print("Original culture at the year 500:")
-	DrawYearCultureMap(chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture, 500, chronica)
-	fmt.Println()
-	fmt.Print("Original culture at the year 1000:")
-	DrawYearCultureMap(chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture, 1000, chronica)
-	fmt.Println()
-	fmt.Print("Original culture at the year 2000:")
-	DrawYearCultureMap(chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture, 2000, chronica)
-	fmt.Println()
-	fmt.Print("Original culture at the year 3000:")
-	DrawYearCultureMap(chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture, 3000, chronica)
-	fmt.Println()
-	fmt.Print("Original culture at the year 4000:")
-	DrawYearCultureMap(chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture, 4000, chronica)
-	fmt.Println()
-	fmt.Print("Original culture at the year 5000:")
-	DrawYearCultureMap(chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture, 5000, chronica)
-
+	fmt.Printf("Original %s at the year %v:", culType, year)
+	DrawYearCultureMap(culture, year, chronica)
 	fmt.Println()
 }
