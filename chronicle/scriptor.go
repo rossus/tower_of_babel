@@ -244,7 +244,9 @@ func Atlas(chronica types.GlobalChronicle, cultureType string, year int) {
 	} else if cultureType=="b"{
 		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture
 		culType="base culture"
-	}
+	} else {
+		return
+		}
 	fmt.Println()
 	fmt.Printf("Original %s at the year %v:", culType, year)
 	DrawYearCultureMap(culture, year, chronica)
