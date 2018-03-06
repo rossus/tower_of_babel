@@ -29,20 +29,24 @@ func Controller(chronica types.GlobalChronicle) {
 		}
 		cmd:=strings.Split(command, " ")
 		if cmd[0]=="atlas" {
-			year, err:=strconv.Atoi(cmd[2])
-			if err!=nil {
-				fmt.Println(err)
-			} else {
-				chronicle.Atlas(chronica, cmd[1], year)
+			if len(cmd)>=3 {
+				year, err := strconv.Atoi(cmd[2])
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					chronicle.Atlas(chronica, cmd[1], year)
+				}
 			}
 		} else if cmd[0]=="continue" {
-			year, err:=strconv.Atoi(cmd[1])
-			if err!=nil {
-				fmt.Println(err)
-			} else {
-				chronicle.ContinueGlobalHistory(&chronica, year)
-				fmt.Printf("This world has %v years of history now\n", len(chronica.Chronica))
-				fmt.Println("")
+			if len(cmd)>=2 {
+				year, err := strconv.Atoi(cmd[1])
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					chronicle.ContinueGlobalHistory(&chronica, year)
+					fmt.Printf("This world has %v years of history now\n", len(chronica.Chronica))
+					fmt.Println("")
+				}
 			}
 		} else if cmd[0]=="exit" {
 			fmt.Println("Bye!")
@@ -59,15 +63,17 @@ func Controller(chronica types.GlobalChronicle) {
 		} else if cmd[0]=="story" {
 			chronicle.TellMeAStory(chronica)
 		} else if cmd[0]=="tree" {
-			x, err:=strconv.Atoi(cmd[1])
-			if err!=nil {
-				fmt.Println(err)
-			} else {
-				y, err:=strconv.Atoi(cmd[2])
-				if err!=nil {
+			if len(cmd)>=3 {
+				x, err := strconv.Atoi(cmd[1])
+				if err != nil {
 					fmt.Println(err)
 				} else {
-					chronicle.WriteLocalCultureStages(chronica.WorldMap.Tiles[y][x].Chronica)
+					y, err := strconv.Atoi(cmd[2])
+					if err != nil {
+						fmt.Println(err)
+					} else {
+						chronicle.WriteLocalCultureStages(chronica.WorldMap.Tiles[y][x].Chronica)
+					}
 				}
 			}
 		}
