@@ -229,19 +229,19 @@ func TellMeAStory(chronica types.GlobalChronicle) {
 }
 
 
-func Atlas(chronica types.GlobalChronicle, cultureCode string, year int) {
+func Atlas(chronica types.GlobalChronicle, cultureType string, year int) {
 	var culture types.Cultures
 	var culType string
-	if cultureCode=="s" {
+	if cultureType=="s" {
 		culture = chronica.WorldMap.Tiles[0][0].Chronica[0]
 		culType="subculture"
-	} else if cultureCode=="l"{
+	} else if cultureType=="l"{
 		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].LocalCulture
 		culType="local culture"
-	} else if cultureCode=="c"{
+	} else if cultureType=="c"{
 		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].Culture
 		culType="culture"
-	} else if cultureCode=="b"{
+	} else if cultureType=="b"{
 		culture = chronica.WorldMap.Tiles[0][0].Chronica[0].BaseCulture
 		culType="base culture"
 	}

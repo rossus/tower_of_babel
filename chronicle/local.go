@@ -11,7 +11,7 @@ func startLocalCultureChronicle(culture types.SubCulture) []types.CultureYearLoc
 	return chronicle
 }
 
-func ContinueLocalCultureChronicle(chronicle []types.CultureYearLocalChronicle, event int, culture types.SubCulture) []types.CultureYearLocalChronicle {
+func continueLocalCultureChronicle(chronicle []types.CultureYearLocalChronicle, event int, culture types.SubCulture) []types.CultureYearLocalChronicle {
 	chronica:=append(chronicle, types.CultureYearLocalChronicle{time.GetCurrentYear(), event, culture})
 	return chronica
 }

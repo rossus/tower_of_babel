@@ -18,13 +18,13 @@ func StartGlobalCultureChronicle(worldMap types.WorldMap, originCulture types.Su
 	return chronicle
 }
 
-func ContinueGlobalCultureChronicle(chronicle []types.CultureYearGlobalChronicle, cultures []types.SubCulture) []types.CultureYearGlobalChronicle {
+func continueGlobalCultureChronicle(chronicle []types.CultureYearGlobalChronicle, cultures []types.SubCulture) []types.CultureYearGlobalChronicle {
 	chronica:=append(chronicle, types.CultureYearGlobalChronicle{time.GetCurrentYear(), cultures})
 	time.EndThisYear()
 	return chronica
 }
 
-func AddCultureToList(tile types.Tile, cultures []types.SubCulture) []types.SubCulture {
+func addCultureToList(tile types.Tile, cultures []types.SubCulture) []types.SubCulture {
 	tileCulture:=tile.Chronica[time.GetCurrentYear()-1].SubCulture
 	for i := 0; i < len(cultures); i++ {
 		if tileCulture == cultures[i] {

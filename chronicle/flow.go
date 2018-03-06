@@ -9,7 +9,7 @@ import (
 func runLocalHistory(tile types.Tile) types.Tile {
 	cultura := tile.Chronica[time.GetCurrentYear()-2].SubCulture
 	cultura, event := culture.YearlyCultureMutation(cultura)
-	tile.Chronica = ContinueLocalCultureChronicle(tile.Chronica, event, cultura)
+	tile.Chronica = continueLocalCultureChronicle(tile.Chronica, event, cultura)
 	return tile
 }
 
@@ -21,10 +21,10 @@ func RunGlobalHistory(worldMap types.WorldMap, finalYear int) (types.GlobalChron
 		for j := 0; j < len(worldMap.Tiles); j++ {
 			for k := 0; k < len(worldMap.Tiles[j]); k++ {
 				worldMap.Tiles[j][k] = runLocalHistory(worldMap.Tiles[j][k])
-				cultures = AddCultureToList(worldMap.Tiles[j][k], cultures)
+				cultures = addCultureToList(worldMap.Tiles[j][k], cultures)
 			}
 		}
-		chronica = ContinueGlobalCultureChronicle(chronica, cultures)
+		chronica = continueGlobalCultureChronicle(chronica, cultures)
 	}
 
 	var chronicle = types.GlobalChronicle{}
@@ -32,4 +32,17 @@ func RunGlobalHistory(worldMap types.WorldMap, finalYear int) (types.GlobalChron
 	chronicle.Chronica=chronica
 
 	return chronicle
+}
+
+func ContinueGlobalHistory(chronica *types.GlobalChronicle, newFinal int) {
+	for i := len(chronica.Chronica); i < newFinal; i++ {
+		var cultures = []types.SubCulture{}
+		for j := 0; j < len(chronica.WorldMap.Tiles); j++ {
+			for k := 0; k < len(chronica.WorldMap.Tiles[j]); k++ {
+				chronica.WorldMap.Tiles[j][k] = runLocalHistory(chronica.WorldMap.Tiles[j][k])
+				cultures = addCultureToList(chronica.WorldMap.Tiles[j][k], cultures)
+			}
+		}
+		chronica.Chronica = continueGlobalCultureChronicle(chronica.Chronica, cultures)
+	}
 }
