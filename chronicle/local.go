@@ -5,14 +5,19 @@ import (
 	"github.com/rossus/tower_of_babel/time"
 )
 
-func startLocalCultureChronicle(culture types.SubCulture) []types.CultureYearLocalChronicle {
-	chronicle := make([]types.CultureYearLocalChronicle, 0)
-	chronicle=append(chronicle, types.CultureYearLocalChronicle{1, 0,culture})
+func startLocalCultureChronicle(culture types.SubCulture, year int) []types.CultureYearLocalChronicle {
+	chronicle := make([]types.CultureYearLocalChronicle, year)
+	chronicle[0] = types.CultureYearLocalChronicle{1, 0, culture}
 	return chronicle
 }
 
 func continueLocalCultureChronicle(chronicle []types.CultureYearLocalChronicle, event int, culture types.SubCulture) []types.CultureYearLocalChronicle {
-	chronica:=append(chronicle, types.CultureYearLocalChronicle{time.GetCurrentYear(), event, culture})
-	return chronica
+	chronicle[time.GetCurrentYear()-1] = types.CultureYearLocalChronicle{time.GetCurrentYear(), event, culture}
+	return chronicle
 }
 
+func expandLocalCultureChronicle(chronicle []types.CultureYearLocalChronicle, addition int) []types.CultureYearLocalChronicle {
+	additionalChronicle := make([]types.CultureYearLocalChronicle, addition)
+	chronicle = append(chronicle, additionalChronicle...)
+	return chronicle
+}

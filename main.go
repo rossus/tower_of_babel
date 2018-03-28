@@ -11,7 +11,7 @@ func main() {
 
 	worldMap := maps.LoadAndConvertMap("mycenae2")
 
-	finalYear:=controller.GreetAndAsk()
+	finalYear := controller.GreetAndAsk()
 
 	chronica := chronicle.RunGlobalHistory(worldMap, finalYear)
 

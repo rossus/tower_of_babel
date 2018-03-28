@@ -2,7 +2,7 @@ package types
 
 //Event codes: 1 - SubCulture changed, 2 - LocalCulture changed, 3 - Culture changed, 4 - BaseCulture changed
 type CultureYearLocalChronicle struct {
-	Year int
+	Year  int
 	Event int
 	SubCulture
 }
@@ -12,12 +12,12 @@ type CultureLocalTreeHistory []BaseCultureTreeHistory
 type BaseCultureTreeHistory struct {
 	BaseCulture
 	AlphaOmega [2]int
-	Cultures []CultureTreeHistory
+	Cultures   []CultureTreeHistory
 }
 
 type CultureTreeHistory struct {
 	Culture
-	AlphaOmega [2]int
+	AlphaOmega    [2]int
 	LocalCultures []LocalCultureTreeHistory
 }
 
@@ -27,7 +27,7 @@ type LocalCultureTreeHistory struct {
 }
 
 type CultureYearGlobalChronicle struct {
-	Year int
+	Year     int
 	Cultures []SubCulture
 }
 

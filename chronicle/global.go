@@ -5,23 +5,22 @@ import (
 	"github.com/rossus/tower_of_babel/time"
 )
 
-//TODO: write area covered by culture
-func StartGlobalCultureChronicle(worldMap types.WorldMap, originCulture types.SubCulture) []types.CultureYearGlobalChronicle {
-	chronicle := make([]types.CultureYearGlobalChronicle, 0)
+func StartGlobalCultureChronicle(worldMap types.WorldMap, originCulture types.SubCulture, year int) []types.CultureYearGlobalChronicle {
+	chronicle := make([]types.CultureYearGlobalChronicle, year)
 	for i := 0; i < len(worldMap.Tiles); i++ {
 		for j := 0; j < len(worldMap.Tiles[i]); j++ {
-			worldMap.Tiles[i][j].Chronica = startLocalCultureChronicle(originCulture)
+			worldMap.Tiles[i][j].Chronica = startLocalCultureChronicle(originCulture, year)
 		}
 	}
-	chronicle = append(chronicle, types.CultureYearGlobalChronicle{1, []types.SubCulture{originCulture}})
+	chronicle[0] = types.CultureYearGlobalChronicle{1, []types.SubCulture{originCulture}}
 	time.EndThisYear()
 	return chronicle
 }
 
 func continueGlobalCultureChronicle(chronicle []types.CultureYearGlobalChronicle, cultures []types.SubCulture) []types.CultureYearGlobalChronicle {
-	chronica:=append(chronicle, types.CultureYearGlobalChronicle{time.GetCurrentYear(), cultures})
+	chronicle[time.GetCurrentYear()-1] = types.CultureYearGlobalChronicle{time.GetCurrentYear(), cultures}
 	time.EndThisYear()
-	return chronica
+	return chronicle
 }
 
 func addCultureToList(tile types.Tile, cultures []types.SubCulture) []types.SubCulture {
@@ -32,4 +31,12 @@ func addCultureToList(tile types.Tile, cultures []types.SubCulture) []types.SubC
 		}
 	}
 	return append(cultures, tileCulture)
+}
+
+func expandLocalCultureChronicles(worldMap *types.WorldMap, addition int) {
+	for i := 0; i < len(worldMap.Tiles); i++ {
+		for j := 0; j < len(worldMap.Tiles[i]); j++ {
+			worldMap.Tiles[i][j].Chronica = expandLocalCultureChronicle(worldMap.Tiles[i][j].Chronica, addition)
+		}
+	}
 }

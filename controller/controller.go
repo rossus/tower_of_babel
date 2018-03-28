@@ -8,13 +8,14 @@ import (
 	"strconv"
 	"github.com/rossus/tower_of_babel/chronicle"
 	"github.com/rossus/tower_of_babel/common/types"
+	"github.com/rossus/tower_of_babel/time"
 )
 
 func GreetAndAsk() int {
 	fmt.Println()
 	var finalYear int
 	fmt.Println("Welcome to Tower of Babel v.0.03!")
-	fmt.Print("Input the final year of history: ")
+	fmt.Print("Enter the final year of history: ")
 	fmt.Scanln(&finalYear)
 	return finalYear
 }
@@ -44,7 +45,7 @@ func Controller(chronica types.GlobalChronicle) {
 				year, err := strconv.Atoi(cmd[1])
 				if err != nil {
 					fmt.Println(err)
-				} else {
+				} else if year >= time.GetCurrentYear() {
 					chronicle.ContinueGlobalHistory(&chronica, year)
 					fmt.Printf("This world has %v years of history now\n", len(chronica.Chronica))
 					fmt.Println("")
