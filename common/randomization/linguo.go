@@ -48,7 +48,7 @@ func decideSyllable(sylNum int) int {
 	}
 }
 
-//matchSyllables(word) cuts a word into syllables. It will try to do it right at future.
+//matchSyllables(word) cuts a word into syllables.
 func matchSyllables(name string) []string {
 	var nameSyl []string
 	for {

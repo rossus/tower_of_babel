@@ -2,7 +2,7 @@ package chronicle
 
 import (
 	"github.com/rossus/tower_of_babel/common/types"
-	"github.com/rossus/tower_of_babel/time"
+	"github.com/rossus/tower_of_babel/session"
 )
 
 func startLocalCultureChronicle(culture types.SubCulture, year int) []types.CultureYearLocalChronicle {
@@ -12,7 +12,7 @@ func startLocalCultureChronicle(culture types.SubCulture, year int) []types.Cult
 }
 
 func continueLocalCultureChronicle(chronicle []types.CultureYearLocalChronicle, event int, culture types.SubCulture) []types.CultureYearLocalChronicle {
-	chronicle[time.GetCurrentYear()-1] = types.CultureYearLocalChronicle{time.GetCurrentYear(), event, culture}
+	chronicle[session.GetCurrentYear()-1] = types.CultureYearLocalChronicle{session.GetCurrentYear(), event, culture}
 	return chronicle
 }
 

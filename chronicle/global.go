@@ -2,7 +2,7 @@ package chronicle
 
 import (
 	"github.com/rossus/tower_of_babel/common/types"
-	"github.com/rossus/tower_of_babel/time"
+	"github.com/rossus/tower_of_babel/session"
 )
 
 func StartGlobalCultureChronicle(worldMap types.WorldMap, originCulture types.SubCulture, year int) []types.CultureYearGlobalChronicle {
@@ -13,18 +13,18 @@ func StartGlobalCultureChronicle(worldMap types.WorldMap, originCulture types.Su
 		}
 	}
 	chronicle[0] = types.CultureYearGlobalChronicle{1, []types.SubCulture{originCulture}}
-	time.EndThisYear()
+	session.EndThisYear()
 	return chronicle
 }
 
 func continueGlobalCultureChronicle(chronicle []types.CultureYearGlobalChronicle, cultures []types.SubCulture) []types.CultureYearGlobalChronicle {
-	chronicle[time.GetCurrentYear()-1] = types.CultureYearGlobalChronicle{time.GetCurrentYear(), cultures}
-	time.EndThisYear()
+	chronicle[session.GetCurrentYear()-1] = types.CultureYearGlobalChronicle{session.GetCurrentYear(), cultures}
+	session.EndThisYear()
 	return chronicle
 }
 
 func addCultureToList(tile types.Tile, cultures []types.SubCulture) []types.SubCulture {
-	tileCulture:=tile.Chronica[time.GetCurrentYear()-1].SubCulture
+	tileCulture:=tile.Chronica[session.GetCurrentYear()-1].SubCulture
 	for i := 0; i < len(cultures); i++ {
 		if tileCulture == cultures[i] {
 			return cultures
