@@ -8,7 +8,8 @@ import (
 	"strconv"
 	"github.com/rossus/tower_of_babel/chronicle"
 	"github.com/rossus/tower_of_babel/session"
-	"github.com/rossus/tower_of_babel/maps"
+	"github.com/rossus/tower_of_babel/cartography"
+	"encoding/json"
 )
 
 func SessionController() {
@@ -126,7 +127,7 @@ func MenuController() {
 						fmt.Println(err)
 					} else {
 						fmt.Println("------")
-						worldMap := maps.LoadAndConvertMap("mycenae2")
+						worldMap := cartography.LoadAndConvertMap("mycenae2")
 						fmt.Print("Enter the final year of history: ")
 						fmt.Scanln(&finalYear)
 
@@ -138,6 +139,38 @@ func MenuController() {
 
 					}
 
+				}
+			}
+		} else if cmd[0] == "save" {
+			fmt.Println("0")
+			list := session.GetSessionList()
+			if len(cmd) >= 2 {
+				if _, exists := list[cmd[1]]; !exists {
+					fmt.Println("No such " + cmd[1] + " session!")
+				} else {
+					path:="./saves/"+cmd[1]+".json"
+					if _, err := os.Stat(path); !os.IsNotExist(err) {
+						fmt.Println("1")
+						err := os.Remove(path)
+
+						if err != nil {
+							fmt.Println(err)
+						}
+					}
+					file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0666)
+					if err != nil {
+						fmt.Println(err)
+					}
+					fmt.Println("2")
+					defer file.Close()
+
+					sessionJSON, err:=json.Marshal(list[cmd[1]])
+					if err != nil {
+						fmt.Println(err)
+					}
+					fmt.Println("3")
+
+					file.Write(sessionJSON)
 				}
 			}
 		}

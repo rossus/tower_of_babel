@@ -2,40 +2,40 @@ package types
 
 //Event codes: 1 - SubCulture changed, 2 - LocalCulture changed, 3 - Culture changed, 4 - BaseCulture changed
 type CultureYearLocalChronicle struct {
-	Year  int
-	Event int
-	SubCulture
+	Year  int `json:"year"`
+	Event int `json:"event"`
+	SubCulture `json:"subculture"`
 }
 
 type CultureLocalTreeHistory []BaseCultureTreeHistory
 
 type BaseCultureTreeHistory struct {
-	BaseCulture
-	AlphaOmega [2]int
-	Cultures   []CultureTreeHistory
+	BaseCulture `json:"base_cultures"`
+	AlphaOmega [2]int `json:"alpha_omega"`
+	Cultures   []CultureTreeHistory `json:"cultures"`
 }
 
 type CultureTreeHistory struct {
-	Culture
-	AlphaOmega    [2]int
-	LocalCultures []LocalCultureTreeHistory
+	Culture `json:"culture"`
+	AlphaOmega    [2]int `json:"alpha_omega"`
+	LocalCultures []LocalCultureTreeHistory `json:"local_cultures"`
 }
 
 type LocalCultureTreeHistory struct {
-	LocalCulture
-	AlphaOmega [2]int
+	LocalCulture `json:"local_culture"`
+	AlphaOmega [2]int `json:"alpha_omega"`
 }
 
 type CultureYearGlobalChronicle struct {
-	Year     int
-	Cultures []SubCulture
+	Year     int `json:"year"`
+	Cultures []SubCulture `json:"subcultures"`
 }
 
 type CultureGlobalTreeHistory []BaseCultureTreeHistory
 
 type GlobalChronicle struct {
-	WorldMap WorldMap
-	Chronica []CultureYearGlobalChronicle
+	WorldMap WorldMap `json:"world_map"`
+	Chronica []CultureYearGlobalChronicle `json:"chronica"`
 }
 
 //Interface for all types of cultures from SubCulture to BaseCulture

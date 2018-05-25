@@ -1,9 +1,9 @@
 package types
 
 type Session struct {
-	Year      *int
-	Name      string
-	Chronicle *GlobalChronicle
+	Year      *int `json:"year"`
+	Name      string `json:"name"`
+	Chronicle *GlobalChronicle `json:"chronicle"`
 }
 
 // Used when no session is chosen right now

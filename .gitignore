@@ -1,2 +1,4 @@
 # idea
 .idea
+saves/*
+.DS_Store

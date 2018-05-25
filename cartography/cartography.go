@@ -1,4 +1,4 @@
-package maps
+package cartography
 
 import (
 	"io/ioutil"
