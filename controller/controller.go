@@ -9,14 +9,15 @@ import (
 	"github.com/rossus/tower_of_babel/chronicle"
 	"github.com/rossus/tower_of_babel/session"
 	"github.com/rossus/tower_of_babel/cartography"
-	"encoding/json"
+	"github.com/rossus/tower_of_babel/converter"
 )
 
 func SessionController() {
 	fmt.Println("You can now get more information about this world. What do you want to do next? Type 'help' to get the full list of commands.")
+	saved := false
 	for {
 		var command string
-		chronica:=session.GetGlobalChronicle()
+		chronica := session.GetGlobalChronicle()
 		scanner := bufio.NewScanner(os.Stdin)
 		if scanner.Scan() {
 			command = scanner.Text()
@@ -42,13 +43,26 @@ func SessionController() {
 					chronicle.ContinueGlobalHistory(year)
 					fmt.Printf("This world has %v years of history now\n", len(chronica.Chronica))
 					fmt.Println("")
+					saved = false
 				}
 			}
 		} else if cmd[0] == "exit" {
-			fmt.Println("Leaving the session...")
-			session.UnloadSession()
-			fmt.Println("------")
-			break
+			fmt.Println(saved)
+			y := true
+			var answ string
+			if saved == false {
+				fmt.Println("You have unsaved changes here, do you really want to quit? Y/n")
+				fmt.Scanln(&answ)
+				if answ != "Y" {
+					y = false
+				}
+			}
+			if y == true {
+				fmt.Println("Leaving the session...")
+				session.UnloadSession()
+				fmt.Println("------")
+				break
+			}
 		} else if cmd[0] == "help" {
 			fmt.Println("You can use these commands:")
 			fmt.Println("atlas [culture type] [year]		//draw an atlas for that type of original culture at certain year")
@@ -58,6 +72,9 @@ func SessionController() {
 			fmt.Println("help							//see all commands")
 			fmt.Println("story							//tell a story about original culture	")
 			fmt.Println("tree [x] [y]					//draw a culture tree for the tile (x, y)")
+		} else if cmd[0] == "save" {
+			converter.SaveSession(session.GetActiveSession())
+			saved = true
 		} else if cmd[0] == "story" {
 			chronicle.TellMeAStory(chronica)
 		} else if cmd[0] == "tree" {
@@ -139,38 +156,6 @@ func MenuController() {
 
 					}
 
-				}
-			}
-		} else if cmd[0] == "save" {
-			fmt.Println("0")
-			list := session.GetSessionList()
-			if len(cmd) >= 2 {
-				if _, exists := list[cmd[1]]; !exists {
-					fmt.Println("No such " + cmd[1] + " session!")
-				} else {
-					path:="./saves/"+cmd[1]+".json"
-					if _, err := os.Stat(path); !os.IsNotExist(err) {
-						fmt.Println("1")
-						err := os.Remove(path)
-
-						if err != nil {
-							fmt.Println(err)
-						}
-					}
-					file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0666)
-					if err != nil {
-						fmt.Println(err)
-					}
-					fmt.Println("2")
-					defer file.Close()
-
-					sessionJSON, err:=json.Marshal(list[cmd[1]])
-					if err != nil {
-						fmt.Println(err)
-					}
-					fmt.Println("3")
-
-					file.Write(sessionJSON)
 				}
 			}
 		}

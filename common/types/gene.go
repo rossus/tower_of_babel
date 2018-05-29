@@ -36,3 +36,23 @@ type SubCulture struct {
 	LocalCulture
 	Code CultureGeneCode `json:"code"`
 }
+
+//Cultures saved structs
+type SavedBaseCulture struct {
+	Name string `json:"name"`
+}
+
+type SavedCulture struct {
+	SavedBaseCulture
+	Stage int `json:"stage"`
+}
+
+type SavedLocalCulture struct {
+	SavedCulture
+	SubStage int `json:"substage"`
+}
+
+type SavedSubCulture struct {
+	SavedLocalCulture
+	Code []int `json:"code"`
+}

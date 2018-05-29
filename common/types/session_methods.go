@@ -29,3 +29,11 @@ func (s Session) UpdateChronicle(worldMap WorldMap, chronica []CultureYearGlobal
 }
 
 func (s BlankSession) UpdateChronicle(worldMap WorldMap, chronica []CultureYearGlobalChronicle) {}
+
+func (s Session) GetSession() Session {
+	return s
+}
+
+func (s BlankSession) GetSession() Session {
+	return Session{}
+}

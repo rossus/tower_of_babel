@@ -47,3 +47,7 @@ func EndThisYear() {
 func GetGlobalChronicle() types.GlobalChronicle {
 	return active.GetChronicle()
 }
+
+func GetActiveSession() types.Session {
+	return active.GetSession()
+}
