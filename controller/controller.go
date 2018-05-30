@@ -47,7 +47,6 @@ func SessionController() {
 				}
 			}
 		} else if cmd[0] == "exit" {
-			fmt.Println(saved)
 			y := true
 			var answ string
 			if saved == false {

@@ -50,5 +50,5 @@ type Cultures interface {
 type SavedCultureYearLocalChronicle struct {
 	Year  int  `json:"year"`
 	Event int  `json:"event"`
-	SavedSubCulture `json:"culture"`
+	SavedCultures `json:"culture"`
 }

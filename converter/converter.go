@@ -48,39 +48,44 @@ func checkCodeChange(prevCode, code types.CultureGeneCode) []int {
 
 func changeSubCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
+	var c types.SavedSubCulture
+	c.Code=checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
-	newChron.Code = checkCodeChange(prevCode, yearChronica.Code)
+	newChron.SavedCultures = c
 	return newChron
 }
 
 func changeLocalCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
+	var c types.SavedLocalCulture
+	c.SubStage=yearChronica.SubStage
+	c.Code=checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
-	newChron.Code = checkCodeChange(prevCode, yearChronica.Code)
-	newChron.SubStage = yearChronica.SubStage
+	newChron.SavedCultures = c
 	return newChron
 }
 
 func changeCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
+	var c types.SavedCulture
+	c.Stage=yearChronica.Stage
+	c.Code=checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
-	newChron.Code = checkCodeChange(prevCode, yearChronica.Code)
-	newChron.SubStage = yearChronica.SubStage
-	newChron.Stage = yearChronica.Stage
+	newChron.SavedCultures = c
 	return newChron
 }
 
 func changeBaseCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
+	var c types.SavedBaseCulture
+	c.Name=yearChronica.Name
+	c.Code=checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
-	newChron.Code = checkCodeChange(prevCode, yearChronica.Code)
-	newChron.SubStage = yearChronica.SubStage
-	newChron.Stage = yearChronica.Stage
-	newChron.Name = yearChronica.Name
+	newChron.SavedCultures = c
 	return newChron
 }
 

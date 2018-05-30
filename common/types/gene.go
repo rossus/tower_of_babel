@@ -40,19 +40,21 @@ type SubCulture struct {
 //Cultures saved structs
 type SavedBaseCulture struct {
 	Name string `json:"name"`
+	Code []int `json:"code"`
 }
 
 type SavedCulture struct {
-	SavedBaseCulture
 	Stage int `json:"stage"`
+	Code []int `json:"code"`
 }
 
 type SavedLocalCulture struct {
-	SavedCulture
 	SubStage int `json:"substage"`
+	Code []int `json:"code"`
 }
 
 type SavedSubCulture struct {
-	SavedLocalCulture
 	Code []int `json:"code"`
 }
+
+type SavedCultures interface {}
