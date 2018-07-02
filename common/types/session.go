@@ -26,5 +26,14 @@ type Sessions interface {
 type SavedSession struct {
 	Year     int           `json:"year"`
 	Name     string        `json:"name"`
+	Version  string        `json:"version"`
 	WorldMap SavedWorldMap `json:"world_map"`
+}
+
+//Session struct used in loads
+type LoadedSession struct {
+	Year     int           `json:"year"`
+	Name     string        `json:"name"`
+	Version  string        `json:"version"`
+	WorldMap LoadedWorldMap `json:"world_map"`
 }

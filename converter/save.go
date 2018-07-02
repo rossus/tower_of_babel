@@ -5,6 +5,7 @@ import (
 	"os"
 	"fmt"
 	"encoding/json"
+	"github.com/rossus/tower_of_babel/common/constants"
 )
 
 func SaveSession(s types.Session) {
@@ -12,6 +13,7 @@ func SaveSession(s types.Session) {
 	world_map := copyTilesFrom(s.Chronicle.WorldMap)
 	saved.Year = *s.Year
 	saved.Name = s.Name
+	saved.Version = constants.VERSION_FULL
 	saved.WorldMap = world_map
 
 	path := "./saves/" + s.Name + ".json"
@@ -33,7 +35,10 @@ func SaveSession(s types.Session) {
 		fmt.Println(err)
 	}
 
-	file.Write(sessionJSON)
+	_, err = file.Write(sessionJSON)
+	if err == nil {
+		fmt.Println("Session saved.")
+	}
 }
 
 func checkCodeChange(prevCode, code types.CultureGeneCode) []int {
@@ -49,7 +54,7 @@ func checkCodeChange(prevCode, code types.CultureGeneCode) []int {
 func changeSubCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
 	var c types.SavedSubCulture
-	c.Code=checkCodeChange(prevCode, yearChronica.Code)
+	c.Code = checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
 	newChron.SavedCultures = c
@@ -59,8 +64,8 @@ func changeSubCulture(prevCode types.CultureGeneCode, yearChronica types.Culture
 func changeLocalCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
 	var c types.SavedLocalCulture
-	c.SubStage=yearChronica.SubStage
-	c.Code=checkCodeChange(prevCode, yearChronica.Code)
+	c.SubStage = yearChronica.SubStage
+	c.Code = checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
 	newChron.SavedCultures = c
@@ -70,8 +75,8 @@ func changeLocalCulture(prevCode types.CultureGeneCode, yearChronica types.Cultu
 func changeCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
 	var c types.SavedCulture
-	c.Stage=yearChronica.Stage
-	c.Code=checkCodeChange(prevCode, yearChronica.Code)
+	c.Stage = yearChronica.Stage
+	c.Code = checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
 	newChron.SavedCultures = c
@@ -81,8 +86,8 @@ func changeCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYea
 func changeBaseCulture(prevCode types.CultureGeneCode, yearChronica types.CultureYearLocalChronicle) types.SavedCultureYearLocalChronicle {
 	var newChron types.SavedCultureYearLocalChronicle
 	var c types.SavedBaseCulture
-	c.Name=yearChronica.Name
-	c.Code=checkCodeChange(prevCode, yearChronica.Code)
+	c.Name = yearChronica.Name
+	c.Code = checkCodeChange(prevCode, yearChronica.Code)
 	newChron.Year = yearChronica.Year
 	newChron.Event = yearChronica.Event
 	newChron.SavedCultures = c

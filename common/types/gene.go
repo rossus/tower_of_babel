@@ -57,4 +57,17 @@ type SavedSubCulture struct {
 	Code []int `json:"code"`
 }
 
-type SavedCultures interface {}
+type SavedCultures interface {
+	GetCode() []int
+	GetSubStage() int
+	GetStage() int
+	GetName() string
+}
+
+//Cultures loaded struct
+type LoadedCulture struct {
+	Name string `json:"name"`
+	Stage int `json:"stage"`
+	SubStage int `json:"substage"`
+	Code []int `json:"code"`
+}

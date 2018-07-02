@@ -41,7 +41,7 @@ func SessionController() {
 					fmt.Println(err)
 				} else if year >= session.GetCurrentYear() {
 					chronicle.ContinueGlobalHistory(year)
-					fmt.Printf("This world has %v years of history now\n", len(chronica.Chronica))
+					fmt.Printf("This world has %v years of history now\n", len(session.GetGlobalChronicle().Chronica))
 					fmt.Println("")
 					saved = false
 				}
@@ -128,6 +128,17 @@ func MenuController() {
 				} else {
 					fmt.Println("------")
 					session.SetActiveSession(list[cmd[1]])
+					SessionController()
+				}
+			}
+		} else if cmd[0] == "loadir" {
+			//list := session.GetSessionList()
+			if len(cmd) >= 2 {
+				if newSession, err := converter.LoadSession(cmd[1]); err!="" {
+					fmt.Println(err)
+				} else {
+					fmt.Println("------")
+					session.SetActiveSession(&newSession)
 					SessionController()
 				}
 			}

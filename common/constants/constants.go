@@ -12,3 +12,10 @@ const GENOM_CODE_LOCAL_CULTURE_RANGE = 6
 
 //System constants
 const SYSTEM_UNLOOP = 10000
+
+//Version constants
+const VERSION_PREF = "0.03"
+const VERSION_MID = ".1"
+const VERSION_POST = "271"
+const VERSION_SMALL = VERSION_PREF + VERSION_MID
+const VERSION_FULL = VERSION_SMALL + "." + VERSION_POST
