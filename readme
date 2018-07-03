@@ -1,32 +1,27 @@
-Tower of Babel версия 0.03
+Tower of Babel version 0.04
+===========================
 
-Что это?
-Эта программа в идеале должна генерировать историю некоего мира с упором на эволюцию различных человеческих культур.
-Идея появилась под впечатлением от генератора карт для Crusader Kings 2 под названием CK2 Generator, в котором
-разные культуры происходили друг от друга и порой наблюдались некоторые схожести в именах, титулах и прочем. Хотелось бы
-сделать этот процесс более реалистичным, также было бы круто иметь возможность сделать на основе этого различный геймплей.
+## About
 
-Что есть сейчас?
-Загружается карта, на которой в каждой клетке происходит эволюция изначальной случайно сгенерированной культуры. Можно
-посмотреть культурное древо каждой клетки, карту распространения изначальной культуры на определённый год и анализ её
-истории. Также есть возможность продолжить историю до желаемого года.
+Here I'm trying to make history generator with culture evolution as the main feauture. That idea appeared after I had
+tried CK2 Generator (map/mod generator for Crusader Kings 2: https://github.com/yemmlie/ck2gen).
 
-Что нужно сделать в ближайшее время?
-Прежде чем приступать к функционалу версии 0.04, требуется дошлифовать версию 0.03. Можно убрать множество лишних
-телодвижений с помощью указателей. Также есть старый TO DO из версии 0.02, связанный с излишней запутанностью функции.
+## What it can do now
 
-Создать сейвы и сессии (почти сделано). Теперь также стоит подумать об уменьшении объёма сейвов.
+It can load map and begin the evolution of randomly generated culture in each tile (it is only plain 15X15 tiles map
+called "mycenae" availible now). You can see culture tree for each tile, see atlas of original culture for any year and
+short analysis of it's evolution. Also you can continue history of the world up to another year. It is also availible
+to save/load your worlds.
 
-Также следует подумать о том, что я бы хотел добавить, чем всё станет в дальнейшем, какова роль культурного
-кода.
+## What to do next
 
-После написания сейвов следует подготовить json'ы для клиентов.
+Add some basic interactions between tiles. Add influence from geography and neighbouring cultures.
 
-Чего хотелось бы достичь?
-- Эволюция и взаимодействие культур
-- Влияние генокода на поведение культур
-- Эволюция языков
-- Эволюция климата
-- Технический прогресс
-- Политическая эволюция
-- Возможность влиять на происходящее
+## Long-time goals
+- Improved culture evolution and interaction
+- Genocode influence on culture behavior
+- Linguistic evolution
+- Climate evolution
+- Scientific progress
+- Political evolution
+- Ability to influence historical progress (gameplay)
