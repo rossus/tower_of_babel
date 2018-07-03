@@ -108,9 +108,9 @@ func WriteScriptorHeader() {
 
 	fmt.Println(babil("+-----------------------------------+"))
 	fmt.Println(babil("|~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~ |"))
-	fmt.Println(babil("| TOWER OF BABEL v0.03 (05.03.2018)~|"))
-	fmt.Println(babil("|~  ~  ~ v0.03.1 (28.03.2018)  ~  ~ |"))
-	fmt.Println(babil("| ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~|"))
+	fmt.Println(babil("| TOWER OF BABEL v0.04 (03.07.2018)~|"))
+	fmt.Println(babil("|~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~ |"))
+	//fmt.Println(babil("| ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~|"))
 	fmt.Println(babil("+-----------------------------------+"))
 	fmt.Println()
 }

@@ -2,7 +2,7 @@ A small roadmap:
 .01 - generate culture name and gene code (22.12.2017)
 .02 - evolve culture through time and scribe it (15.01.2018)
 .03 - load world map and evolve culture on it (05.03.2018)
-.04 - save result somewhere and add json
+.04 - save result somewhere and add json (03.07.2018)
 .05 - write a console client
 .06 - add some basic interaction between cultures in different tiles
 .07 - add oceans and transwater interaction

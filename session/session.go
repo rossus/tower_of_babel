@@ -6,7 +6,7 @@ import (
 
 var blank = types.BlankSession{}
 var active = types.ActiveSession{blank}
-var sessionList = make(map[string]*types.Session)
+var sessionList = make(map[string]types.SessionInfo)
 
 func SetActiveSession(session *types.Session) {
 	active.Sessions = session
@@ -16,16 +16,18 @@ func UnloadSession() {
 	active.Sessions = blank
 }
 
-func GetSessionList() map[string]*types.Session {
+func SetSessionList(list map[string]types.SessionInfo) {
+	sessionList = list
+}
+
+func GetSessionList() map[string]types.SessionInfo {
 	return sessionList
 }
 
 func NewSession(name string) string {
 	yearOne := 1
 	newSession := types.Session{&yearOne, name, &types.GlobalChronicle{types.WorldMap{}, []types.CultureYearGlobalChronicle{}}}
-	if _, exists := sessionList[name]; !exists {
-		sessionList[name] = &newSession
-	} else {
+	if _, exists := sessionList[name]; exists {
 		return "Name " + name + " is already in use!"
 	}
 	SetActiveSession(&newSession)

@@ -104,6 +104,7 @@ func MenuController() {
 		if scanner.Scan() {
 			command = scanner.Text()
 		}
+		converter.RenewSessionInfoList()
 		cmd := strings.Split(command, " ")
 		if cmd[0] == "exit" {
 			fmt.Println("Bye!")
@@ -115,26 +116,16 @@ func MenuController() {
 			fmt.Println("list							//see all sessions")
 			fmt.Println("load [session name]				//load session")
 			fmt.Println("new [session name]				//start new session")
+			fmt.Println("remove [session name]			//remove session")
 		} else if cmd[0] == "list" {
+			converter.RenewSessionInfoList()
 			list := session.GetSessionList()
 			for x := range list {
-				fmt.Println(" --- Session ", x, " : ", list[x].GetYear(), " years")
+				fmt.Println(" --- Session ", x, " : ", list[x].Year, " years;  Version ", list[x].Version)
 			}
 		} else if cmd[0] == "load" {
-			list := session.GetSessionList()
 			if len(cmd) >= 2 {
-				if _, exists := list[cmd[1]]; !exists {
-					fmt.Println("No such session: ", cmd[1], "")
-				} else {
-					fmt.Println("------")
-					session.SetActiveSession(list[cmd[1]])
-					SessionController()
-				}
-			}
-		} else if cmd[0] == "loadir" {
-			//list := session.GetSessionList()
-			if len(cmd) >= 2 {
-				if newSession, err := converter.LoadSession(cmd[1]); err!="" {
+				if newSession, err := converter.LoadSession(cmd[1]); err != "" {
 					fmt.Println(err)
 				} else {
 					fmt.Println("------")
@@ -166,6 +157,15 @@ func MenuController() {
 
 					}
 
+				}
+			}
+		} else if cmd[0] == "remove" {
+			if len(cmd) >= 2 {
+				err:=os.Remove("./saves/" + cmd[1] + ".json")
+				if err != nil {
+					fmt.Println(err.Error())
+				} else {
+					fmt.Println("Session ", cmd[1], " was successfully removed")
 				}
 			}
 		}

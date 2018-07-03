@@ -2,3 +2,5 @@
 .idea
 saves/*
 .DS_Store
+!saves/old
+saves/old/*

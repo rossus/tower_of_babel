@@ -13,6 +13,12 @@ type ActiveSession struct {
 	Sessions
 }
 
+//Short info about existing session
+type SessionInfo struct{
+	Year int
+	Name, Version string
+}
+
 //Common BlankSession and Session interface
 type Sessions interface {
 	GetYear() int
