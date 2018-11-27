@@ -1,10 +1,10 @@
 package cartography
 
 import (
-	"io/ioutil"
 	"bytes"
-	"strings"
 	"github.com/rossus/tower_of_babel/common/types"
+	"io/ioutil"
+	"strings"
 )
 
 
@@ -48,7 +48,7 @@ func LoadAndConvertMap(mapName string) types.WorldMap {
 		worldMap:=types.WorldMap{}
 		for i:=0; i<len(smallMap); i++ {
 			worldMap.Tiles=append(worldMap.Tiles, []types.Tile{})
-			for j:=0; j<len(smallMap[i]); j++ {
+			for j:=0; j<len(smallMap[i])-1; j++ {
 				tile:=types.Tile{}
 				tile.Geography=string(smallMap[i][j])
 				if bigMap[i*2][j*2+1]==byte('-') {tile.HasRiver[0]=true}
