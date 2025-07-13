@@ -1,15 +1,16 @@
 package controller
 
 import (
-	"fmt"
 	"bufio"
-	"strings"
+	"fmt"
 	"os"
 	"strconv"
-	"github.com/rossus/tower_of_babel/chronicle"
-	"github.com/rossus/tower_of_babel/session"
+	"strings"
+
 	"github.com/rossus/tower_of_babel/cartography"
+	"github.com/rossus/tower_of_babel/chronicle"
 	"github.com/rossus/tower_of_babel/converter"
+	"github.com/rossus/tower_of_babel/session"
 )
 
 func SessionController() {
@@ -81,11 +82,11 @@ func SessionController() {
 				x, err := strconv.Atoi(cmd[1])
 				if err != nil {
 					fmt.Println(err)
-				} else if (x <= len(chronica.WorldMap.Tiles[0]) && x >= 0) {
+				} else if x <= len(chronica.WorldMap.Tiles[0]) && x >= 0 {
 					y, err := strconv.Atoi(cmd[2])
 					if err != nil {
 						fmt.Println(err)
-					} else if (y <= len(chronica.WorldMap.Tiles) && y >= 0) {
+					} else if y <= len(chronica.WorldMap.Tiles) && y >= 0 {
 						chronicle.WriteLocalCultureStages(chronica.WorldMap.Tiles[y][x].Chronica)
 					}
 				}
@@ -96,7 +97,7 @@ func SessionController() {
 
 func MenuController() {
 	fmt.Println()
-	fmt.Println("Welcome to Tower of Babel v.0.03!")
+	fmt.Println("Welcome to Tower of Babel v.0.04!")
 	fmt.Println("What do you want to do? Type 'help' to get the full list of commands.")
 	for {
 		var command string
@@ -161,7 +162,7 @@ func MenuController() {
 			}
 		} else if cmd[0] == "remove" {
 			if len(cmd) >= 2 {
-				err:=os.Remove("./saves/" + cmd[1] + ".json")
+				err := os.Remove("./saves/" + cmd[1] + ".json")
 				if err != nil {
 					fmt.Println(err.Error())
 				} else {

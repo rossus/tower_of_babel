@@ -1,9 +1,10 @@
 package chronicle
 
 import (
-	"github.com/rossus/tower_of_babel/common/types"
 	"fmt"
-	"github.com/kortschak/ct"
+
+	"github.com/fatih/color"
+	"github.com/rossus/tower_of_babel/common/types"
 )
 
 func writeOneYearLocal(chronica []types.CultureYearLocalChronicle, year int) {
@@ -104,7 +105,7 @@ func WriteLocalCultureStages(chronicle []types.CultureYearLocalChronicle) {
 }
 
 func WriteScriptorHeader() {
-	var babil = (ct.Bg(ct.Blue) | ct.Fg(ct.BoldYellow)).Paint
+	babil := color.New(color.FgYellow, color.Bold, color.BgBlue).SprintFunc()
 
 	fmt.Println(babil("+-----------------------------------+"))
 	fmt.Println(babil("|~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~  ~ |"))
@@ -117,9 +118,9 @@ func WriteScriptorHeader() {
 
 func DrawYearCultureMap(culture types.Cultures, year int, chronica types.GlobalChronicle) {
 	defer fmt.Println()
-	//var red = (ct.Bg(ct.Red) | ct.Bold).Paint
-	//var blue = (ct.Bg(ct.Blue) | ct.Bold).Paint
-	var green = (ct.Bg(ct.Green) | ct.Bold).Paint
+	//var red = color.New(color.BgRed, color.Bold).SprintFunc()
+	//var blue = color.New(color.BgGreen, color.Bold).SprintFunc()
+	var green = color.New(color.BgGreen, color.Bold).SprintFunc()
 	//var chosen = (ct.Bg(ct.Yellow) | ct.Fg(ct.Yellow)).Paint
 
 	for i := 0; i < len(chronica.WorldMap.Tiles); i++ {
